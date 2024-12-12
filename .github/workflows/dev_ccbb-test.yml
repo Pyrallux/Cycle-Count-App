@@ -52,14 +52,10 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_00E1C2FFE9DA4B658E27AB64F9B8DCF9 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5F9518CDAA804323B53CC20F57C467E0 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FA29813C6A4E414F8ACA2E4BA764ADCF }}
-      - name: Azure CLI script file
-        uses: azure/cli@v2
-        with:
-          inlineScript: |
-            az webapp config appsettings set --resource-group CCBB-dev_group --name CCBB-test --settings POST_BUILD_COMMAND='docker compose up -d'
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'CCBB-test'
           slot-name: 'Production'
+          startup-command: 'docker compose up -d'
