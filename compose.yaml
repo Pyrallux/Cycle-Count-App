@@ -3,7 +3,7 @@ services:
     build:
       context: ./Backend
     environment:
-      - DJANGO_KEY=${{ secrets.DJANGO_KEY }}
+      - DJANGO_KEY=${secrets.DJANGO_KEY}
     ports:
       - 8000:8000
     depends_on:
@@ -19,8 +19,8 @@ services:
     build:
       context: ./WebServer
     environment:
-      - SSL_PUBLIC=${{ secrets.SSL_PUBLIC }}
-      - SSL_PRIVATE=${{ secrets.SSL_PRIVATE }}
+      - SSL_PUBLIC=${secrets.SSL_PUBLIC}
+      - SSL_PRIVATE=${secrets.SSL_PRIVATE}
     depends_on:
       - ccbb-backend
     ports:
