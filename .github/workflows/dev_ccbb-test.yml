@@ -18,9 +18,9 @@ jobs:
       - name: 'Create env file'
         run: |
           touch .env
-          echo DJANGO_KEY=${{ secrets.DJANGO_KEY }} >> .env
-          echo SSL_PRIVATE=${{ secrets.SSL_PRIVATE }} >> .env
-          echo SSL_PUBLIC=${{ secrets.SSL_PUBLIC }} >> .env
+          echo DJANGO_KEY='${{ secrets.DJANGO_KEY }}' >> .env
+          echo SSL_PRIVATE='${{ secrets.SSL_PRIVATE }}' >> .env
+          echo SSL_PUBLIC='${{ secrets.SSL_PUBLIC }}' >> .env
           cat .env
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
