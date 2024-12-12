@@ -1,0 +1,14 @@
+version: "1.0"
+services:
+  ccbb-backend:
+    image: pyrallux/ccbb-backend:latest
+    container_name: ccbb-backend
+    ports:
+      - 8000:8000
+
+  ccbb-webserver:
+    image: pyrallux/ccbb-webserver:latest
+    container_name: ccbb-webserver
+    ports:
+      - 80:80
+      - 443:443

@@ -30,9 +30,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY ./data/db.sqlite3 ./data/db.sqlite3
 COPY . .
 
+ENV DJANGO_KEY=${DJANGO_KEY}
 
-RUN --mount=type=secret,id=django-private-key \
-    python manage.py collectstatic
+RUN python manage.py collectstatic
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
