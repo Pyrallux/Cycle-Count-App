@@ -56,7 +56,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            az webapp config appsettings set --resouce-group CCBB-dev_group --name CCBB-test --settings POST_BUILD_COMMAND='docker compose up -d'
+            az webapp config appsettings set --resource-group CCBB-dev_group --name CCBB-test --settings POST_BUILD_COMMAND='docker compose up -d'
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
