@@ -30,8 +30,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY ./data/db.sqlite3 ./data/db.sqlite3
 COPY . .
 
-ENV DJANGO_KEY=${DJANGO_KEY}
-
 RUN --mount=type=secret,id=django-private-key.txt \
     python manage.py collectstatic
 
@@ -52,4 +50,4 @@ EXPOSE 8000
 
 
 # Run the application.
-CMD gunicorn --workers=1 ccbb_backend.wsgi --bind 0.0.0.0 --log-level debug --capture-output
+CMD gunicorn --workers=1 ccbb_backend.wsgi --bind 0.0.0.0:8000 --log-level debug --capture-output
