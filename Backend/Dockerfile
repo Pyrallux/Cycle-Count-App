@@ -5,7 +5,7 @@
 # https://docs.docker.com/go/dockerfile-reference/
 
 ARG PYTHON_VERSION=3.12.1
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-slim AS base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -31,7 +31,7 @@ COPY ./data/db.sqlite3 ./data/db.sqlite3
 COPY . .
 
 
-RUN --mount=type=secret,id=django-private-key \
+RUN --mount=type=secret,id=django-private-key.txt \
     python manage.py collectstatic
 
 # Create a non-privileged user that the app will run under.
@@ -51,4 +51,4 @@ EXPOSE 8000
 
 
 # Run the application.
-CMD gunicorn --workers=4 ccbb_backend.wsgi --bind 0.0.0.0:8000 --log-level debug --capture-output
+CMD gunicorn --workers=1 ccbb_backend.wsgi --bind 0.0.0.0 --log-level debug --capture-output

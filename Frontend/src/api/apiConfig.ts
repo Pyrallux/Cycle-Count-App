@@ -1,1 +1,1 @@
-export const databaseURL = "https://cyclecount.app/db"
+export const databaseURL = "https://localhost/db";

@@ -42,11 +42,11 @@ services:
       - ./Backup/archive:/archive
 
 secrets:
-  django-private-key:
+  django-private-key.txt:
     file: ./django-private-key.txt
-  generated-private-key: # SSL Private Key
+  generated-private-key.txt: # SSL Private Key
     file: ./ssl-private-key.txt
-  generated-public-key: # SSL Public Cert
+  generated-public-key.txt: # SSL Public Cert
     file: ./ssl-public-key.crt
 
 volumes:

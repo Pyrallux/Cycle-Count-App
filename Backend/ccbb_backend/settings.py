@@ -16,14 +16,12 @@ from corsheaders.defaults import default_headers
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-KEY_FILE = open("/run/secrets/django-private-key")
+KEY_FILE = open("/run/secrets/django-private-key.txt")
 SECRET_KEY = KEY_FILE.read()
 KEY_FILE.close()
 
 # Application Setup Settings
-ALLOWED_HOSTS = [
-    "cyclecount.app",
-]
+ALLOWED_HOSTS = ["*"]
 
 STATIC_URL = "/static/"
 
@@ -56,57 +54,57 @@ MIDDLEWARE = [
 
 
 # Security Settings
-CSP_STYLE_SRC = ["'self'"]  # Add links here to allow them to load
+# CSP_STYLE_SRC = ["'self'"]  # Add links here to allow them to load
 
-MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
+# MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
 
-SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+# SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
-SECURE_HSTS_SECONDS = 2592000  # 30 days
+# SECURE_HSTS_SECONDS = 2592000  # 30 days
 
-SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_PRELOAD = True
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-CORS_ALLOW_PRIVATE_NETWORK: True
+# CORS_ALLOW_PRIVATE_NETWORK: True
 
-CORS_ALLOWED_ORIGINS = ["https://*.cyclecount.app"]
+# CORS_ALLOWED_ORIGINS = ["https://*.cyclecount.app"]
 
-CSRF_TRUSTED_ORIGINS = ["https://*.cyclecount.app"]
+# CSRF_TRUSTED_ORIGINS = ["https://*.cyclecount.app"]
 
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "POST",
-    "PUT",
-]
+# CORS_ALLOW_METHODS = [
+#     "DELETE",
+#     "GET",
+#     "OPTIONS",
+#     "POST",
+#     "PUT",
+# ]
 
-CORS_ALLOW_HEADERS = (
-    *default_headers,
-    "Access-Control-Allow-Origin",
-)
+# CORS_ALLOW_HEADERS = (
+#     *default_headers,
+#     "Access-Control-Allow-Origin",
+# )
 
-PERMISSIONS_POLICY = {
-    "accelerometer": [],
-    "ambient-light-sensor": [],
-    "autoplay": [],
-    "camera": [],
-    "display-capture": [],
-    "document-domain": [],
-    "encrypted-media": [],
-    "fullscreen": [],
-    "geolocation": [],
-    "gyroscope": [],
-    "interest-cohort": [],
-    "magnetometer": [],
-    "microphone": [],
-    "midi": [],
-    "payment": [],
-    "usb": [],
-}
+# PERMISSIONS_POLICY = {
+#     "accelerometer": [],
+#     "ambient-light-sensor": [],
+#     "autoplay": [],
+#     "camera": [],
+#     "display-capture": [],
+#     "document-domain": [],
+#     "encrypted-media": [],
+#     "fullscreen": [],
+#     "geolocation": [],
+#     "gyroscope": [],
+#     "interest-cohort": [],
+#     "magnetometer": [],
+#     "microphone": [],
+#     "midi": [],
+#     "payment": [],
+#     "usb": [],
+# }
 
 # Default Settings
 ROOT_URLCONF = "ccbb_backend.urls"
@@ -163,7 +161,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
