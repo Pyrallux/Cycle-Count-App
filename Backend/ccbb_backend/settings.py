@@ -17,13 +17,12 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ["DJANGO_KEY"]
+KEY_FILE = open("/run/secrets/django-private-key.txt")
+SECRET_KEY = KEY_FILE.read()
+KEY_FILE.close()
 
 # Application Setup Settings
-ALLOWED_HOSTS = [
-    "cyclecount.app",
-    "localhost",
-]
+ALLOWED_HOSTS = ["*"]
 
 STATIC_URL = "/static/"
 
@@ -55,7 +54,7 @@ MIDDLEWARE = [
 ]
 
 
-# # Security Settings
+# Security Settings
 # CSP_STYLE_SRC = ["'self'"]  # Add links here to allow them to load
 
 # MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
@@ -70,7 +69,7 @@ MIDDLEWARE = [
 
 # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-# CORS_ALLOW_PRIVATE_NETWORK = True
+# CORS_ALLOW_PRIVATE_NETWORK: True
 
 # CORS_ALLOWED_ORIGINS = ["https://*.cyclecount.app"]
 

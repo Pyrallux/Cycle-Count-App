@@ -36,6 +36,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./Backup/archive:/archive
 
+secrets:
+  django-private-key.txt:
+    file: ./django-private-key.txt
+  generated-private-key.txt: # SSL Private Key
+    file: ./ssl-private-key.txt
+  generated-public-key.txt: # SSL Public Cert
+    file: ./ssl-public-key.crt
+
 volumes:
   db-data:
   static-data:
