@@ -4,15 +4,18 @@
 
 ```sh
 docker build --secret id=django-private-key.txt,src="../django-private-key.txt" -t pyrallux/ccbb-backend:latest .
-docker push pyrallux/ccbb-backend:latest
+docker tag pyrallux/ccbb-backend:latest ccbbtestreg.azurecr.io/ccbb-backend:latest
+docker ccbbtestreg.azurecr.io/ccbb-backend:latest
 docker run -v .:/run/secrets -p 8000:8000 pyrallux/ccbb-backend:latest
 ```
 
 ## Webserver
 
 ```sh
-docker build --secret id=generated-private-key.txt,src="../ssl-private-key.txt" --secret id=generated-public-key.txt,src="../ssl-public-key.crt" -t pyrallux/ccbb-webserver:latest .
-docker push pyrallux/ccbb-webserver:latest
+docker build -t pyrallux/ccbb-frontend:latest .
+docker tag pyrallux/ccbb-frontend:latest ccbbtestreg.azurecr.io/ccbb-webserver:latest
+docker push ccbbtestreg.azurecr.io/ccbb-webserver:latest
+docker run -p 80:80 pyrallux/ccbb-frontend:latest
 ```
 
 ## Azure Container Registry
