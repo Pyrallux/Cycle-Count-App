@@ -160,7 +160,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-DEBUG = False 
+DEBUG = True
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [

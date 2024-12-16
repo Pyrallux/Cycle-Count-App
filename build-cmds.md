@@ -5,7 +5,7 @@
 ```sh
 docker build --secret id=django-private-key.txt,src="../django-private-key.txt" -t pyrallux/ccbb-backend:latest .
 docker tag pyrallux/ccbb-backend:latest ccbbtestreg.azurecr.io/ccbb-backend:latest
-docker ccbbtestreg.azurecr.io/ccbb-backend:latest
+docker push ccbbtestreg.azurecr.io/ccbb-backend:latest
 docker run -v .:/run/secrets -p 8000:8000 pyrallux/ccbb-backend:latest
 ```
 
