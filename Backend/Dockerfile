@@ -31,6 +31,8 @@ COPY ./data/db.sqlite3 ./data/db.sqlite3
 COPY . .
 
 RUN --mount=type=secret,id=django-private-key.txt \
+    --mount=type=secret,id=mssql-username.txt \
+    --mount=type=secret,id=mssql-password.txt \
     python manage.py collectstatic
 
 # Create a non-privileged user that the app will run under.

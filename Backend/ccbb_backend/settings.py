@@ -128,11 +128,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ccbb_backend.wsgi.application"
 
+USERNAME_FILE = open("/run/secrets/mssql-username.txt")
+MSSQL_USERNAME = USERNAME_FILE.read()
+USERNAME_FILE.close()
+
+PASSWORD_FILE = open("/run/secrets/mssql-password.txt")
+MSSQL_PASSWORD = PASSWORD_FILE.read()
+PASSWORD_FILE.close()
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "data" / "db.sqlite3",
-    }
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'master',
+        'USER': MSSQL_USERNAME,
+        'PASSWORD': MSSQL_PASSWORD,
+        'HOST': '127.0.0.1',
+        'PORT': '1434',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [

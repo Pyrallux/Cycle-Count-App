@@ -3,7 +3,11 @@
 ## Backend
 
 ```sh
-docker build --secret id=django-private-key.txt,src="../django-private-key.txt" -t pyrallux/ccbb-backend:latest .
+docker build 
+    --secret id=django-private-key.txt,src="../django-private-key.txt" 
+    --secret id=mssql-username.txt,src="../mssql-username.txt" 
+    --secret id=mssql-password.txt,src="../mssql-password.txt"
+    -t pyrallux/ccbb-backend:latest .
 docker tag pyrallux/ccbb-backend:latest ccbbtestreg.azurecr.io/ccbb-backend:latest
 docker push ccbbtestreg.azurecr.io/ccbb-backend:latest
 docker run -v .:/run/secrets -p 8000:8000 pyrallux/ccbb-backend:latest
