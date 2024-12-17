@@ -27,8 +27,16 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python -m pip install -r requirements.txt
 
 # Copy the source code into the container.
-COPY ./data/db.sqlite3 ./data/db.sqlite3
 COPY . .
+
+# Install OBDC Driver 17 for Microsoft SQL Server
+RUN apt-get -y update && \
+    apt-get -y install curl sudo gpg && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc && \
+    curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg && \
+    curl https://packages.microsoft.com/config/debian/12/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list && \
+    sudo apt-get -y update && \
+    sudo ACCEPT_EULA=Y apt-get -y install msodbcsql17
 
 RUN --mount=type=secret,id=django-private-key.txt \
     --mount=type=secret,id=mssql-username.txt \
@@ -49,7 +57,6 @@ RUN adduser \
 
 # Expose the port that the application listens on.
 EXPOSE 8000
-
 
 # Run the application.
 CMD gunicorn --workers=1 ccbb_backend.wsgi --bind 0.0.0.0:8000 --log-level debug --capture-output

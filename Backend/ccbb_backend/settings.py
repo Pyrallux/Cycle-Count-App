@@ -142,7 +142,7 @@ DATABASES = {
         'NAME': 'master',
         'USER': MSSQL_USERNAME,
         'PASSWORD': MSSQL_PASSWORD,
-        'HOST': '127.0.0.1',
+        'HOST': 'host.docker.internal',
         'PORT': '1434',
 
         'OPTIONS': {
