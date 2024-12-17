@@ -4,3 +4,5 @@ Backup/archive/*.tar.gz
 django-private-key.txt
 ssl-public-key.crt
 ssl-private-key.txt
+mssql-username.txt
+mssql-password.txt
