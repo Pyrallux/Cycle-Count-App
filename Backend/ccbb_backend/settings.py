@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from corsheaders.defaults import default_headers
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +21,7 @@ SECRET_KEY = KEY_FILE.read()
 KEY_FILE.close()
 
 # Application Setup Settings
-ALLOWED_HOSTS = ["*"]
+DEBUG = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io"
@@ -31,6 +30,8 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io"
 ]
+
+ALLOWED_HOSTS = ["*"]
 
 
 STATIC_URL = "/static/"
@@ -63,55 +64,6 @@ MIDDLEWARE = [
 ]
 
 
-# Security Settings
-# CSP_STYLE_SRC = ["'self'"]  # Add links here to allow them to load
-
-# MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
-
-# SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
-
-# SECURE_HSTS_SECONDS = 2592000  # 30 days
-
-# SECURE_HSTS_PRELOAD = True
-
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-
-# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-# CORS_ALLOW_PRIVATE_NETWORK: True
-
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "POST",
-    "PUT",
-]
-
-CORS_ALLOW_HEADERS = (
-    *default_headers,
-    "Access-Control-Allow-Origin",
-)
-
-# PERMISSIONS_POLICY = {
-#     "accelerometer": [],
-#     "ambient-light-sensor": [],
-#     "autoplay": [],
-#     "camera": [],
-#     "display-capture": [],
-#     "document-domain": [],
-#     "encrypted-media": [],
-#     "fullscreen": [],
-#     "geolocation": [],
-#     "gyroscope": [],
-#     "interest-cohort": [],
-#     "magnetometer": [],
-#     "microphone": [],
-#     "midi": [],
-#     "payment": [],
-#     "usb": [],
-# }
-
 # Default Settings
 ROOT_URLCONF = "ccbb_backend.urls"
 
@@ -132,6 +84,31 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "ccbb_backend.wsgi.application"
+
+# USERNAME_FILE = open("/run/secrets/mssql-username.txt")
+# MSSQL_USERNAME = USERNAME_FILE.read()
+# USERNAME_FILE.close()
+
+# PASSWORD_FILE = open("/run/secrets/mssql-password.txt")
+# MSSQL_PASSWORD = PASSWORD_FILE.read()
+# PASSWORD_FILE.close()
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "mssql",
+#         "NAME": "InvApp",
+#         "USER": MSSQL_USERNAME,
+#         "PASSWORD": MSSQL_PASSWORD,
+#         "HOST": "pescsql06.pottersignal.com",
+#         "PORT": "1433",
+#         "OPTIONS": {
+#             "driver": "ODBC Driver 17 for SQL Server",
+#         },
+#     },
+# }
+
+# # set this to False if you want to turn off pyodbc's connection pooling
+# DATABASE_CONNECTION_POOLING = False
 
 DATABASES = {
     "default": {
@@ -164,8 +141,6 @@ USE_I18N = True
 USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-DEBUG = True
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [

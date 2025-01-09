@@ -1,15 +1,5 @@
 from rest_framework import serializers
-from .models import (
-    Warehouse,
-    PhysicallyMissingPart,
-    SystematicallyMissingPart,
-    Transaction,
-    Cycle,
-    PastCycle,
-    Bin,
-    PresentPart,
-    SystemPart,
-)
+from .models import *
 
 # REMINDER! Setup Views For Serialized Models
 
@@ -21,8 +11,8 @@ class WarehouseSerializer(serializers.ModelSerializer):
             "warehouse_id",
             "name",
             "manual",
-            "path",
-            "abc_code_path",
+            "plant",
+            "plant_warehouse",
             "cycles_per_year",
         ]
 

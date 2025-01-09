@@ -3,6 +3,7 @@ from .serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from odata_query.django import apply_odata_query
 
 # REMINDER! Setup URLs for Each View
 
@@ -53,6 +54,15 @@ def warehouse_detail(request, id, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(["GET"])
+def warehouse_filter(request, query_str, format=None):
+    if request.method == "GET":
+        warehouse = Warehouse.objects.all()
+        query = apply_odata_query(warehouse, query_str)
+        serializer = WarehouseSerializer(query.all(), many=True)
+        return Response(serializer.data)
+
+
 # Transaction
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def transaction_list(request, format=None):
@@ -97,6 +107,15 @@ def transaction_detail(request, id, format=None):
     elif request.method == "DELETE":
         transaction.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET"])
+def transaction_filter(request, query_str, format=None):
+    if request.method == "GET":
+        transaction = Transaction.objects.all()
+        query = apply_odata_query(transaction, query_str)
+        serializer = TransactionSerializer(query.all(), many=True)
+        return Response(serializer.data)
 
 
 # Cycle
@@ -150,6 +169,15 @@ def cycle_parent(request, parent_id, format=None):
     if request.method == "GET":
         cycle = Cycle.objects.filter(warehouse_id=parent_id)
         serializer = CycleSerializer(cycle, many=True)
+        return Response(serializer.data)
+
+
+@api_view(["GET"])
+def cycle_filter(request, query_str, format=None):
+    if request.method == "GET":
+        cycle = Cycle.objects.all()
+        query = apply_odata_query(cycle, query_str)
+        serializer = CycleSerializer(query.all(), many=True)
         return Response(serializer.data)
 
 
@@ -207,6 +235,15 @@ def past_cycle_parent(request, parent_id, format=None):
         return Response(serializer.data)
 
 
+@api_view(["GET"])
+def past_cycle_filter(request, query_str, format=None):
+    if request.method == "GET":
+        past_cycle = PastCycle.objects.all()
+        query = apply_odata_query(past_cycle, query_str)
+        serializer = PastCycleSerializer(query.all(), many=True)
+        return Response(serializer.data)
+
+
 # Bin
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def bin_list(request, format=None):
@@ -258,6 +295,15 @@ def bin_parent(request, parent_id, format=None):
     if request.method == "GET":
         bin = Bin.objects.filter(cycle_id=parent_id)
         serializer = BinSerializer(bin, many=True)
+        return Response(serializer.data)
+
+
+@api_view(["GET"])
+def bin_filter(request, query_str, format=None):
+    if request.method == "GET":
+        bin = Bin.objects.all()
+        query = apply_odata_query(bin, query_str)
+        serializer = BinSerializer(query.all(), many=True)
         return Response(serializer.data)
 
 
@@ -315,6 +361,15 @@ def present_part_parent(request, parent_id, format=None):
         return Response(serializer.data)
 
 
+@api_view(["GET"])
+def present_part_filter(request, query_str, format=None):
+    if request.method == "GET":
+        present_part = PresentPart.objects.all()
+        query = apply_odata_query(present_part, query_str)
+        serializer = PresentPartSerializer(query.all(), many=True)
+        return Response(serializer.data)
+
+
 # SystemPart
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def system_part_list(request, format=None):
@@ -366,6 +421,15 @@ def system_part_parent(request, parent_id, format=None):
     if request.method == "GET":
         system_part = SystemPart.objects.filter(bin_id=parent_id)
         serializer = SystemPartSerializer(system_part, many=True)
+        return Response(serializer.data)
+
+
+@api_view(["GET"])
+def system_part_filter(request, query_str, format=None):
+    if request.method == "GET":
+        system_part = SystemPart.objects.all()
+        query = apply_odata_query(system_part, query_str)
+        serializer = SystemPartSerializer(query.all(), many=True)
         return Response(serializer.data)
 
 
@@ -424,6 +488,15 @@ def physically_missing_part_parent(request, parent_id, format=None):
     if request.method == "GET":
         physically_missing_part = PhysicallyMissingPart.objects.filter(bin_id=parent_id)
         serializer = PhysicallyMissingPartSerializer(physically_missing_part, many=True)
+        return Response(serializer.data)
+
+
+@api_view(["GET"])
+def physically_missing_part_filter(request, query_str, format=None):
+    if request.method == "GET":
+        physicallyMissingPart = PhysicallyMissingPart.objects.all()
+        query = apply_odata_query(physicallyMissingPart, query_str)
+        serializer = PhysicallyMissingPartSerializer(query.all(), many=True)
         return Response(serializer.data)
 
 
@@ -488,4 +561,13 @@ def systematically_missing_part_parent(request, parent_id, format=None):
         serializer = SystematicallyMissingPartSerializer(
             systematically_missing_part, many=True
         )
+        return Response(serializer.data)
+
+
+@api_view(["GET"])
+def systematically_missing_part_filter(request, query_str, format=None):
+    if request.method == "GET":
+        systematically_missing_part = SystematicallyMissingPart.objects.all()
+        query = apply_odata_query(systematically_missing_part, query_str)
+        serializer = SystematicallyMissingPartSerializer(query.all(), many=True)
         return Response(serializer.data)
