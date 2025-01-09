@@ -36,3 +36,8 @@ az acr login --name ccbbtestreg
 #### Ingress/Networking
 
 - Container App -> Settings -> Ingress -> Enabled/Accepting traffic from anywhere/HTTP/configure ports
+
+az containerapp env create -n PotterContainerAppEnvironment -g Container_Registry_RG --location centralus
+az containerapp create -n invapp-frontend -g Container_Registry_RG -i pottercontainerregistry.azurecr.io/invapp-frontend:latest --environment PotterContainerAppEnvironment --registry-ser
+
+az acr update -n pottercontainerregistry --admin-enabled true

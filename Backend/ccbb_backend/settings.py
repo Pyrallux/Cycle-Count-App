@@ -24,6 +24,15 @@ KEY_FILE.close()
 # Application Setup Settings
 ALLOWED_HOSTS = ["*"]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io"
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io"
+]
+
+
 STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -70,10 +79,6 @@ MIDDLEWARE = [
 # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # CORS_ALLOW_PRIVATE_NETWORK: True
-
-CORS_ALLOWED_ORIGINS = ["https://cyclecount.app/"]
-
-CSRF_TRUSTED_ORIGINS = ["https://cyclecount.app/"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
