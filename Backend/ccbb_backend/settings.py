@@ -24,11 +24,13 @@ KEY_FILE.close()
 DEBUG = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io"
+    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io",
+    "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io/",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io"
+    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io",
+    "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io/",
 ]
 
 ALLOWED_HOSTS = ["*"]
