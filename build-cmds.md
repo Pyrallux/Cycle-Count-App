@@ -4,25 +4,21 @@
 
 ```sh
 docker build --secret id=django-private-key.txt,src="../secrets/django-private-key.txt" --secret id=mssql-username.txt,src="../secrets/mssql-username.txt" --secret id=mssql-password.txt,src="../secrets/mssql-password.txt" -t pottercontainerregistry.azurecr.io/invapp-backend:latest .
-docker tag pyrallux/ccbb-backend:latest ccbbtestreg.azurecr.io/ccbb-backend:latest
-docker push ccbbtestreg.azurecr.io/ccbb-backend:latest
-docker run -v .:/run/secrets -p 8000:8000 pyrallux/ccbb-backend:latest
+docker push pottercontainerregistry.azurecr.io/invapp-backend:latest
 ```
 
-## Webserver
+## Frontend
 
 ```sh
-docker build -t pyrallux/ccbb-frontend:latest .
-docker tag pyrallux/ccbb-frontend:latest ccbbtestreg.azurecr.io/ccbb-webserver:latest
-docker push ccbbtestreg.azurecr.io/ccbb-webserver:latest
-docker run -p 80:80 pyrallux/ccbb-frontend:latest
+docker build -t pottercontainerregistry.azurecr.io/invapp-frontend:latest .
+docker push pottercontainerregistry.azurecr.io/invapp-frontend:latest
 ```
 
 ## Azure Container Registry
 
 ```sh
 az login
-az acr login --name ccbbtestreg
+az acr login --name pottercontainerregistry
 ```
 
 ### Azure Portal Setup
@@ -36,8 +32,3 @@ az acr login --name ccbbtestreg
 #### Ingress/Networking
 
 - Container App -> Settings -> Ingress -> Enabled/Accepting traffic from anywhere/HTTP/configure ports
-
-az containerapp env create -n PotterContainerAppEnvironment -g Container_Registry_RG --location centralus
-az containerapp create -n invapp-frontend -g Container_Registry_RG -i pottercontainerregistry.azurecr.io/invapp-frontend:latest --environment PotterContainerAppEnvironment --registry-ser
-
-az acr update -n pottercontainerregistry --admin-enabled true
