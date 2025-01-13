@@ -21,16 +21,14 @@ SECRET_KEY = KEY_FILE.read()
 KEY_FILE.close()
 
 # Application Setup Settings
-DEBUG = True
+# DEBUG = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io",
-    "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io/",
+    "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://invapp-frontend.happydesert-37a62075.centralus.azurecontainerapps.io",
-    "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io/",
+    "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io",
 ]
 
 ALLOWED_HOSTS = ["*"]
@@ -87,37 +85,37 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ccbb_backend.wsgi.application"
 
-# USERNAME_FILE = open("/run/secrets/mssql-username.txt")
-# MSSQL_USERNAME = USERNAME_FILE.read()
-# USERNAME_FILE.close()
+USERNAME_FILE = open("/run/secrets/mssql-username.txt")
+MSSQL_USERNAME = USERNAME_FILE.read()
+USERNAME_FILE.close()
 
-# PASSWORD_FILE = open("/run/secrets/mssql-password.txt")
-# MSSQL_PASSWORD = PASSWORD_FILE.read()
-# PASSWORD_FILE.close()
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "mssql",
-#         "NAME": "InvApp",
-#         "USER": MSSQL_USERNAME,
-#         "PASSWORD": MSSQL_PASSWORD,
-#         "HOST": "pescsql06.pottersignal.com",
-#         "PORT": "1433",
-#         "OPTIONS": {
-#             "driver": "ODBC Driver 17 for SQL Server",
-#         },
-#     },
-# }
-
-# # set this to False if you want to turn off pyodbc's connection pooling
-# DATABASE_CONNECTION_POOLING = False
+PASSWORD_FILE = open("/run/secrets/mssql-password.txt")
+MSSQL_PASSWORD = PASSWORD_FILE.read()
+PASSWORD_FILE.close()
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "data" / "db.sqlite3",
-    }
+        "ENGINE": "mssql",
+        "NAME": "InvApp",
+        "USER": MSSQL_USERNAME,
+        "PASSWORD": MSSQL_PASSWORD,
+        "HOST": "12.232.138.142",
+        "PORT": "10600",
+        "OPTIONS": {
+            "driver": "ODBC Driver 17 for SQL Server",
+        },
+    },
 }
+
+# set this to False if you want to turn off pyodbc's connection pooling
+DATABASE_CONNECTION_POOLING = False
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "data" / "db.sqlite3",
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -146,7 +144,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
