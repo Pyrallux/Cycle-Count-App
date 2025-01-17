@@ -25,10 +25,12 @@ KEY_FILE.close()
 
 CORS_ALLOWED_ORIGINS = [
     "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io",
+    "https://invapp.pottersignal.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://invapp-frontend2.ambitiousriver-658feae0.centralus.azurecontainerapps.io",
+    "https://invapp.pottersignal.com",
 ]
 
 ALLOWED_HOSTS = ["*"]
